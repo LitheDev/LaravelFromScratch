@@ -24,21 +24,15 @@ Uses Wildcard {post} to display posts dynamically
 */
 Route::get('posts/{post}', function ($slug) {
 
-    // Sets path to resources/
-    $path = __DIR__ . "/../resources/posts/{$slug}.html";
-    
 
     // If file does not exist in path, redirect to homepage
-    if (!file_exists($path)) {
+    if (!file_exists($path = __DIR__ . "/../resources/posts/{$slug}.html")) {
         return redirect('/');
     }
 
-    $post = file_get_contents($path); // Set $post to contents in $path
 
-    // Return view, 'post' to $post (in post.blade.php) to display contents
-    return view('post', [
-            'post' => $post // $post leads to CURRENT DIRECTORY (then up one, resources/post myfirstpost)
-        ]);
+    $post = cache()->remember("posts.{$slug}", now()->addMinutes(2), fn() => file_get_contents($path)); // Cache Remember, remembers / caches posts.slug for 2 minutes. Uses path. Returns file contents of path and sets to $post */
+    return view('post', ['post' => $post]); // Return view, 'post' to $post (in post.blade.php) to display contents
 })->where('post', '[A-z_\-]+'); // Uses regex, checks post contains one or more upper and lower case letters only, no numbers, symbols, etc. (Allows dashes)
 
 
