@@ -26,21 +26,19 @@ Route::get('posts/{post}', function ($slug) {
 
     // Sets path to resources/
     $path = __DIR__ . "/../resources/posts/{$slug}.html";
+    
 
-    // If file does not exist in path
-    if (! file_exists($path))
-    {
-        return redirect('/'); // Redirect to homepage
+    // If file does not exist in path, redirect to homepage
+    if (!file_exists($path)) {
+        return redirect('/');
     }
 
     $post = file_get_contents($path); // Set $post to contents in $path
 
     // Return view, 'post' to $post (in post.blade.php) to display contents
-    return view('post',
-    [
-        // $post leads to CURRENT DIRECTORY (then up one, resources/post myfirstpost)
-        'post' => $post
-    ]); // Function, returns view, name is welcome
-});
+    return view('post', [
+            'post' => $post // $post leads to CURRENT DIRECTORY (then up one, resources/post myfirstpost)
+        ]);
+})->where('post', '[A-z_\-]+'); // Uses regex, checks post contains one or more upper and lower case letters only, no numbers, symbols, etc. (Allows dashes)
 
 
