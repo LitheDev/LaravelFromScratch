@@ -10,9 +10,13 @@
     </head>
     <body class="antialiased">
 
-        <!-- Article 1, Contains link to 'post' in header -->
         <article>
-            <?= $post; ?>
+            <!-- Heading -->
+            <h1><?= $post->title ?></h1>
+            <div>
+                <!-- Body -->
+                <?= $post->body ?>
+            </div>
         </article>
 
         <!-- Link to home page -->

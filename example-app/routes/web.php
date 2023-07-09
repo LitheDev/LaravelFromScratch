@@ -18,40 +18,8 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 // Home Page (When home page is loaded, load posts)
 Route::get('/', function () {
-
-    $files = File::files(resource_path("posts"));
-    $posts = [];
-
-    // For each file in files
-    foreach ($files as $file) {
-
-        // Parse files in resource path
-        $document = YamlFrontMatter::parseFile($file); // Set current document to file metadata
-
-        // Create new post object using metadata from files as the object parameters
-        $posts[] = new Post(
-            $document->title,
-            $document->excerpt,
-            $document->date,
-            $document->body(),
-            $document->slug
-        );
-    }
-
-    // Dump documents
-
-
-
-//    }
-//    $document = YamlFrontMatter::parseFile(
-//        resource_path('posts/my-fourth-post.html')
-//    );
-//
-
-
-
     return view('posts', [
-        'posts' => $posts
+        'posts' => Post::all()
     ]);
 });
 
