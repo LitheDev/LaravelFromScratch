@@ -123,6 +123,7 @@
       <path value="$PROJECT_DIR$/example-app/vendor/phpunit/php-timer" />
       <path value="$PROJECT_DIR$/example-app/vendor/phpunit/phpunit" />
       <path value="$PROJECT_DIR$/example-app/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/example-app/vendor/spatie/yaml-front-matter" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />

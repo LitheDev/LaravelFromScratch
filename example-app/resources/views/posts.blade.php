@@ -10,22 +10,18 @@
     </head>
     <body class="antialiased">
 
-        <!-- Article 1, Contains link to 'post' in header -->
+        <!-- For each post -->
+        <?php foreach ($posts as $post) : ?>
         <article>
-            <h1><a href="/posts/my-first-post">My First Post</a></h1>
-            <p>A quick brown fox jumps over the lazy dog</p>
+            <h1>
+                <a href="/posts/<?= $post->slug; ?>"> <!-- Heading will link to slug -->
+                        <?= $post->title; ?>          <!-- Heading will be the post title -->
+                </a>
+            </h1>
+            <div>
+                    <?= $post->excerpt; ?> <!-- Except will be displayed in listing -->
+            </div>
         </article>
-
-        <!-- Article 2, Contains link to 'post' in header -->
-        <article>
-            <h1><a href="/posts/my-second-post">My Second Post</a></h1>
-            <p>A quick brown fox jumps over the lazy dog</p>
-        </article>
-
-        <!-- Article 3, Contains link to 'post' in header -->
-        <article>
-            <h1><a href="/posts/my-third-post">My Third Post</a></h1>
-            <p>A quick brown fox jumps over the lazy dog</p>
-        </article>
+        <?php endforeach; ?>
     </body>
 </html>

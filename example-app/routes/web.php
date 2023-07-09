@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\Post;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
+use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,24 +18,50 @@ use Illuminate\Support\Facades\Route;
 
 // Home Page (When home page is loaded, load posts)
 Route::get('/', function () {
-    return view('posts'); // Function, returns view, name is welcome
-});
 
-/* Route, shows individual post.
-Uses Wildcard {post} to display posts dynamically
+    $files = File::files(resource_path("posts"));
+    $posts = [];
 
-*/
-Route::get('posts/{post}', function ($slug) {
+    // For each file in files
+    foreach ($files as $file) {
 
+        // Parse files in resource path
+        $document = YamlFrontMatter::parseFile($file); // Set current document to file metadata
 
-    // If file does not exist in path, redirect to homepage
-    if (!file_exists($path = __DIR__ . "/../resources/posts/{$slug}.html")) {
-        return redirect('/');
+        // Create new post object using metadata from files as the object parameters
+        $posts[] = new Post(
+            $document->title,
+            $document->excerpt,
+            $document->date,
+            $document->body(),
+            $document->slug
+        );
     }
 
+    // Dump documents
 
-    $post = cache()->remember("posts.{$slug}", now()->addMinutes(2), fn() => file_get_contents($path)); // Cache Remember, remembers / caches posts.slug for 2 minutes. Uses path. Returns file contents of path and sets to $post */
-    return view('post', ['post' => $post]); // Return view, 'post' to $post (in post.blade.php) to display contents
+
+
+//    }
+//    $document = YamlFrontMatter::parseFile(
+//        resource_path('posts/my-fourth-post.html')
+//    );
+//
+
+
+
+    return view('posts', [
+        'posts' => $posts
+    ]);
+});
+
+// Find a post by its slug and pass it to a view called "post"
+// Keywords; View, Post, pass, slug
+Route::get('posts/{post}', function ($slug) {
+    $post = Post::find($slug); // Find a post by its slug (assign to $post) (uses Post class function find)
+    return view('post', [ // Find a post
+        'post' => $post        // Pass it to $post and return it to the view
+    ]);
 })->where('post', '[A-z_\-]+'); // Uses regex, checks post contains one or more upper and lower case letters only, no numbers, symbols, etc. (Allows dashes)
 
 
