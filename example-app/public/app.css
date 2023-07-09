@@ -1,0 +1,24 @@
+
+/* Body Attributes */
+body
+{
+    background: white;
+    color: #222222;
+    max-width: 600px;
+    margin: auto;
+    font-family: sans-serif;
+
+}
+
+/* Paragraph Attributes */
+p {
+    line-height: 1.6;
+}
+
+/* Article + Article means that this CSS will effect every article except the first one */
+article + article {
+    margin-top: 3rem; /* Margin: Space around elements outside of borders */
+    padding-top: 3rem; /* Space around elements inside borders */
+    border-top: 1px solid #c5c5c5; /* Adds a border to the top of the article */
+}
+
