@@ -1,11 +1,5 @@
-@extends ('layout') <!-- This view is extending layout -->
+<x-layout>
 
-@section ('banner')
-    <h1>My Blog</h1>
-@endsection
-
-@section ('content')    <!-- Content Section Start -->
-    <!-- For each post -->
     @foreach ($posts as $post)
         <article class="{{$loop->even ? 'test' : ''}}">
             <h1>
@@ -18,8 +12,7 @@
             </div>
         </article>
     @endforeach
-@endsection         <!-- Content section end -->
-
+</x-layout>
 
 
 

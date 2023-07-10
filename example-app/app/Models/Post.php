@@ -55,10 +55,20 @@ class Post
     /* Function Find - Dynamically finds slug in file system */
     public static function find($slug)
     {
-        // of all the blog posts, find the one with a slug that matches the one that was requested
-        $posts = static::all();
-
         return static::all()->firstWhere('slug', $slug);
+    }
+
+    /* Function findOrFail - Uses find method to see if post contains a truthy fail, if not, throws modelnotfound */
+    public static function findOrFail($slug)
+    {
+        $post = static::find($slug);
+
+        // If post is not present, return 404
+        if (!$post) {
+            throw new ModelNotFoundException();
+        }
+
+        return $post;
 
     }
 }

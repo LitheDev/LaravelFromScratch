@@ -7,7 +7,7 @@
     </head>
     <body>
 
-        @yield('content') <!-- Slot content in here -->
+        {{$slot}}<!-- Slot content in here -->
 
     </body>
 </html>

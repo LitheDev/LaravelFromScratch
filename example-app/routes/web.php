@@ -23,13 +23,12 @@ Route::get('/', function () {
     ]);
 });
 
-// Find a post by its slug and pass it to a view called "post"
-// Keywords; View, Post, pass, slug
+
+
 Route::get('posts/{post}', function ($slug) {
-    $post = Post::find($slug); // Find a post by its slug (assign to $post) (uses Post class function find)
-    return view('post', [ // Find a post
-        'post' => $post        // Pass it to $post and return it to the view
+    $post = Post::find($slug);
+
+    return view('post', [
+        'post' => Post::findOrFail($slug)
     ]);
-})->where('post', '[A-z_\-]+'); // Uses regex, checks post contains one or more upper and lower case letters only, no numbers, symbols, etc. (Allows dashes)
-
-
+});
