@@ -1,3 +1,28 @@
+@extends ('layout') <!-- This view is extending layout -->
+
+@section ('banner')
+    <h1>My Blog</h1>
+@endsection
+
+@section ('content')    <!-- Content Section Start -->
+    <!-- For each post -->
+    @foreach ($posts as $post)
+        <article class="{{$loop->even ? 'test' : ''}}">
+            <h1>
+                <a href="/posts/{{ $post -> slug}}">
+                    {{$post ->title}}
+                </a>
+            </h1>
+            <div>
+                {{$post -> excerpt}}<!-- Except will be displayed in listing -->
+            </div>
+        </article>
+    @endforeach
+@endsection         <!-- Content section end -->
+
+
+
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -8,20 +33,7 @@
         <link rel="stylesheet" href="/app.css">
         <script src="/app.js"></script>
     </head>
-    <body class="antialiased">
 
-        <!-- For each post -->
-        <?php foreach ($posts as $post) : ?>
-        <article>
-            <h1>
-                <a href="/posts/<?= $post->slug; ?>"> <!-- Heading will link to slug -->
-                        <?= $post->title; ?>          <!-- Heading will be the post title -->
-                </a>
-            </h1>
-            <div>
-                    <?= $post->excerpt; ?> <!-- Except will be displayed in listing -->
-            </div>
-        </article>
-        <?php endforeach; ?>
-    </body>
-</html>
+
+
+
