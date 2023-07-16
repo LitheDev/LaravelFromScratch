@@ -3,7 +3,7 @@
     @foreach ($posts as $post)
         <article class="{{$loop->even ? 'test' : ''}}">
             <h1>
-                <a href="/posts/{{ $post -> post}}">
+                <a href="/posts/{{ $post -> slug}}">
                     {!! $post ->title !!}
                 </a>
             </h1>
@@ -11,6 +11,11 @@
                 {{$post -> excerpt}}<!-- Except will be displayed in listing -->
             </div>
         </article>
+
+        <p>
+            <a href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a>
+        </p>
+
     @endforeach
 </x-layout>
 
