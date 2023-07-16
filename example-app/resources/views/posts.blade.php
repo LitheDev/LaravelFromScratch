@@ -3,7 +3,7 @@
     @foreach ($posts as $post)
         <article class="{{$loop->even ? 'test' : ''}}">
             <h1>
-                <a href="/posts/{{ $post -> id}}">
+                <a href="/posts/{{ $post -> post}}">
                     {!! $post ->title !!}
                 </a>
             </h1>
