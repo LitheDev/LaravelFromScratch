@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        // User object and fields
-        Schema::create('users', function (Blueprint $table) {
+        // Category object
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->boolean('is_admin')->default(false);
-            $table->rememberToken();
+            $table->string('name')->unique(); // Name (Unique)
+            $table->string('slug')->unique(); // Slug (Unique)
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('categories');
     }
 };

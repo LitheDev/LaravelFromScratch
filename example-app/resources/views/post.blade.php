@@ -1,21 +1,23 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<x-layout>
+    <article>
 
-        <title>My Blog</title>
-        <link rel="stylesheet" href="/app.css">
-        <script src="/app.js"></script>
-    </head>
-    <body class="antialiased">
+        <!-- Post Title -->
+        <h1>{!! $post->title !!}</h1>
 
-        <!-- Article 1, Contains link to 'post' in header -->
-        <article>
-            <?= $post; ?>
-        </article>
+        <!-- By Author in Category -->
+        <p>
+            By <a href="#">{{ $post->user->name }}</a> in <a href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a>
+        </p>
 
-        <!-- Link to home page -->
-        <a href="/">Go Back</a>
-    </body>
-</html>
+        <!-- Post Body -->
+        <div>
+            {!! $post->body !!}
+        </div>
+    </article>
+
+
+
+
+    <!-- Link to home page -->
+    <a href="/">Go Back</a>
+</x-layout>

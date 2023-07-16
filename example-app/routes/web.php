@@ -1,6 +1,10 @@
 <?php
 
+use App\Models\Category;
+use App\Models\Post;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
+use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,32 +19,23 @@ use Illuminate\Support\Facades\Route;
 
 // Home Page (When home page is loaded, load posts)
 Route::get('/', function () {
-    return view('posts'); // Function, returns view, name is welcome
+    return view('posts', [
+        'posts' => Post::with('category')->get()
+    ]);
 });
 
-/* Route, shows individual post.
-Uses Wildcard {post} to display posts dynamically
 
-*/
-Route::get('posts/{post}', function ($slug) {
 
-    // Sets path to resources/
-    $path = __DIR__ . "/../resources/posts/{$slug}.html";
-
-    // If file does not exist in path
-    if (! file_exists($path))
-    {
-        return redirect('/'); // Redirect to homepage
-    }
-
-    $post = file_get_contents($path); // Set $post to contents in $path
-
-    // Return view, 'post' to $post (in post.blade.php) to display contents
-    return view('post',
-    [
-        // $post leads to CURRENT DIRECTORY (then up one, resources/post myfirstpost)
+Route::get('posts/{post:slug}', function (Post $post) {
+    return view('post', [
         'post' => $post
-    ]); // Function, returns view, name is welcome
+    ]);
 });
 
+// Category get request
+Route::get('categories/{category:slug}', function (Category $category) {
 
+    return view('posts', [
+        'posts' => $category->posts
+    ]);
+});

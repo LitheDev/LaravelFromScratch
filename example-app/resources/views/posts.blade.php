@@ -1,3 +1,26 @@
+<x-layout>
+
+    @foreach ($posts as $post)
+        <article class="{{$loop->even ? 'test' : ''}}">
+            <h1>
+                <a href="/posts/{{ $post -> slug}}">
+                    {!! $post ->title !!}
+                </a>
+            </h1>
+            <div>
+                {{$post -> excerpt}}<!-- Except will be displayed in listing -->
+            </div>
+        </article>
+
+        <p>
+            <a href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a>
+        </p>
+
+    @endforeach
+</x-layout>
+
+
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -8,24 +31,7 @@
         <link rel="stylesheet" href="/app.css">
         <script src="/app.js"></script>
     </head>
-    <body class="antialiased">
 
-        <!-- Article 1, Contains link to 'post' in header -->
-        <article>
-            <h1><a href="/posts/my-first-post">My First Post</a></h1>
-            <p>A quick brown fox jumps over the lazy dog</p>
-        </article>
 
-        <!-- Article 2, Contains link to 'post' in header -->
-        <article>
-            <h1><a href="/posts/my-second-post">My Second Post</a></h1>
-            <p>A quick brown fox jumps over the lazy dog</p>
-        </article>
 
-        <!-- Article 3, Contains link to 'post' in header -->
-        <article>
-            <h1><a href="/posts/my-third-post">My Third Post</a></h1>
-            <p>A quick brown fox jumps over the lazy dog</p>
-        </article>
-    </body>
-</html>
+
