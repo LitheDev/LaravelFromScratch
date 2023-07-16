@@ -14,10 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->id();
+            $table->id();                                  // PK: ID
             $table->string('title');
-            $table -> foreignId('category_id');
-            $table->string('slug')->unique();
+            $table -> foreignId('category_id');     // FK: Category ID
+            $table ->foreignId('user_id');          // FK: User ID
+            $table->string('slug')->unique();       // UK: Slug
             $table->text('excerpt');
             $table->text('body');
             $table->timestamps();

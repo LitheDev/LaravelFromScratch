@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
+        // Category object
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // Name
-            $table->string('slug');
+            $table->string('name')->unique(); // Name (Unique)
+            $table->string('slug')->unique(); // Slug (Unique)
             $table->timestamps();
         });
     }
