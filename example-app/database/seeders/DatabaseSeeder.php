@@ -19,36 +19,15 @@ class DatabaseSeeder extends Seeder
     // When this database seeder is run, it will do the following to prepare the production environment for testing
     public function run()
     {
-        // Replace existing data with new data
-        User::truncate();
-        Category::truncate();
+
+        $user = User::factory()->create([
+            'name'=>'John Doe'
+        ]);
 
         // Create 10 users from the UserFactory.php template
-        \App\Models\User::factory(10)->create();
-
-        // Create a Category called Personal
-        Category::create([
-            'name'=>'Personal',
-            'slug'=>'personal'
+        Post::factory(5)->create([
+            'user_id' => $user->id
         ]);
 
-        // Create a Category called Family
-        Category::create([
-            'name'=>'Family',
-            'slug'=>'family'
-        ]);
-
-        // Create a Category called Work
-        Category::create([
-            'name'=>'Work',
-            'slug'=>'work'
-        ]);
-
-
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
     }
 }

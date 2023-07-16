@@ -18,8 +18,8 @@ class Post extends Model
     }
 
     // A post belongs to a user
-    public function user()
+    public function author() // By default, belongsTo will assume the foreign key is author_id, specifying below will change this.
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

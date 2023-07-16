@@ -16,6 +16,7 @@ return new class extends Migration
         // User object and fields
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('username')->unique();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
