@@ -20,14 +20,13 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 // Home Page (When home page is loaded, load posts)
 Route::get('/', function () {
     return view('posts', [
-        'posts' => Post::all()
+        'posts' => Post::with('category')->get()
     ]);
 });
 
 
 
 Route::get('posts/{post:slug}', function (Post $post) {
-
     return view('post', [
         'post' => $post
     ]);

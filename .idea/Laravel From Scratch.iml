@@ -9,6 +9,7 @@
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/example-app/vendor/spatie/yaml-front-matter" />
+      <excludeFolder url="file://$MODULE_DIR$/example-app/vendor/itsgoingd/clockwork" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
